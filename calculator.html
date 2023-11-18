@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<title>Калькулятор</title>
+ 
+    <style>
+        Button {
+          min-width: 100px;
+          font-family: inherit;
+          appearance: none;
+          border: 0;
+          border-radius: 5px;
+          background: #5D9B9B;
+          color: #fff;
+          padding: 8px 16px;
+          font-size: 1rem;
+          cursor: pointer;
+        }
+        
+        Button:hover {
+          background: #7FB5B5;
+        }
+        
+        Button:focus {
+          outline: none;
+          box-shadow: 0 0 0 4px #cbd6ee;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+    
+    <div class="input-fields">
+    <div class="container">
+    <label>Резистор:</label>
+    <input id="num1" />
+    </div>
+	
+	<div class="container">
+    <label>Конденсатор:</label>
+    <input id="num2" />
+    </div>
+    </div>
+    
+    <div class="container">
+    <label>Выход:</label>
+    <select id="q" onchange="selectQ()">
+                <option value="Q3">Q3</option>
+                <option value="Q4">Q4</option>
+                <option value="Q5">Q5</option>
+                <option value="Q6">Q6</option>
+                <option value="Q7">Q7</option>
+                <option value="Q8">Q8</option>
+                <option value="Q9">Q9</option>
+                <option value="Q11">Q11</option>
+                <option value="Q12">Q12</option>
+                <option value="Q13">Q13</option>
+    </select>
+    </div>
+    
+
+	<button onclick="func()">Посчитать</button>
+	</div>
+
+	<p id="result"></p>
+
+	<script>
+	var q;
+	  function selectQ() {
+	    const Q = document.getElementById("q").value;
+	    switch (Q){
+	        case "Q3": q=3; break;
+	        case "Q4": q=4; break;
+	        case "Q5": q=5; break;
+	        case "Q6": q=6; break;
+	        case "Q7": q=7; break;
+	        case "Q8": q=8; break;
+	        case "Q9": q=9; break;
+	        case "Q11": q=11; break;
+	        case "Q12": q=12; break;
+	        case "Q13": q=13; break;
+	    }
+	  }
+	  function func() {
+	    selectQ();
+	    var r, h, m, s;
+	    var num1 = Number(document.getElementById("num1").value);
+	    var num2 = Number(document.getElementById("num2").value);
+	    
+	    r = (num1 * num2/100000 * 2.3)* 2**q;
+	    
+	    if (r>60){
+	        m = Math.floor(r/60);
+	        s = r%60;
+	    }
+	    else {
+	        m = 0; h = 0;
+	    }
+	    if (m>60){
+	        h = Math.floor(m/60);
+	        m = m%60;
+	    }
+	    else {
+	        h = 0;
+	    }
+
+	    if (h > 0){
+	        document.getElementById("result").innerHTML = h + " часов " + m
+	        + " минут " + s + " секунд";
+	    }
+	    else if (m > 0){
+	        document.getElementById("result").innerHTML = m
+	        + " минут " + s + " секунд";
+	    }
+	    else {
+	        document.getElementById("result").innerHTML = h + " часов " + m
+	        + " минут " + s + " секунд";
+	    }
+	    
+	  }
+	</script>
+
+</body>
+</html>
